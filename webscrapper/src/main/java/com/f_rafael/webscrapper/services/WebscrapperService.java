@@ -1,4 +1,4 @@
-package com.f_rafael.webscrapper.service;
+package com.f_rafael.webscrapper.services;
 
 import com.f_rafael.webscrapper.WebpageRepository;
 import com.f_rafael.webscrapper.models.Webpage;
@@ -21,7 +21,7 @@ public class WebscrapperService {
         String description = document.select("meta[name=description]")
                 .attr("content"); //Extrae informacion del head de la pagina web, meta es una etiqueta y...
                 //...content es un atributo
-        String picture = document.select("meta[name=image]")
+        String picture = document.select("meta[property=og:image]")
                 .attr("content");
 
         Webpage webpage = new Webpage();
@@ -29,6 +29,7 @@ public class WebscrapperService {
         webpage.setDescription(description);
         webpage.setPicture(picture);
         webpage.setDomain(domain);
+        webpage.setUrl(url);
 
         repository.save(webpage);
 

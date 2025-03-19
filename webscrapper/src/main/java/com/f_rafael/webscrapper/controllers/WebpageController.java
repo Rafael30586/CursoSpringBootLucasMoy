@@ -2,14 +2,13 @@ package com.f_rafael.webscrapper.controllers;
 
 import com.f_rafael.webscrapper.WebpageRepository;
 import com.f_rafael.webscrapper.models.Webpage;
-import com.f_rafael.webscrapper.service.WebscrapperService;
+import com.f_rafael.webscrapper.services.WebscrapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

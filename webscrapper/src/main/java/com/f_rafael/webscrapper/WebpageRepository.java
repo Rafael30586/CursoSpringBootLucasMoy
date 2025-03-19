@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface WebpageRepository extends CrudRepository<Webpage, Integer> {
 
-    @Query("SELECT w FROM Webpage w WHERE w.domain LIKE %:text% OR w.description LIKE %:text% OR w.title LIKE %:text% OR w.url LIKE %:text% ORDER BY page_rank DESC")
+    @Query("SELECT w FROM Webpage w WHERE w.domain LIKE %:text% OR w.description LIKE %:text% OR w.title LIKE %:text% OR w.url LIKE %:text% ORDER BY w.pageRank DESC")
     List<Webpage> findByText(@Param("text") String text);
 }

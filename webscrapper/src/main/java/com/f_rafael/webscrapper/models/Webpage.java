@@ -14,6 +14,7 @@ public class Webpage {
     private String domain;
     private String url;
     private String title;
+    @Column(name="page_description")
     private String description;
     private String picture;
     @Column(name ="page_rank")

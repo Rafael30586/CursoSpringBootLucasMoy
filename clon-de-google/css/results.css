@@ -56,3 +56,8 @@ footer {
     max-width: 590px;
     margin-top: -10px;
 }
+
+.result .picture{
+    width: 60px;
+    border-radius: 5px;
+}

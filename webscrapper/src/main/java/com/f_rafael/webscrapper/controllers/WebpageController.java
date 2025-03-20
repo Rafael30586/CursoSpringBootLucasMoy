@@ -5,14 +5,14 @@ import com.f_rafael.webscrapper.models.Webpage;
 import com.f_rafael.webscrapper.services.SpiderService;
 import com.f_rafael.webscrapper.services.WebscrapperService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("/api")
 public class WebpageController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class WebpageController {
     @Autowired
     private SpiderService spiderService;
 
-    @GetMapping("/api/search")
+    @GetMapping("/search")
     public List<Webpage> search(@RequestParam("query") String query){
         List<Webpage> list = repository.findByText(query);
         //Iterable<Webpage> result = repository.findByText();
@@ -33,13 +33,13 @@ public class WebpageController {
         return list;
     }
 
-    @GetMapping("/api/webscrapper")
+    @GetMapping("/webscrapper")
     public void scrapAndSave(@RequestParam("url") String url) throws IOException {
         webscrapperService.scrapAndSave(url);
 
     }
 
-    @GetMapping("/api/start")
+    @GetMapping("/start")
     public void scrapAndSave() throws IOException {
         spiderService.start();
     }

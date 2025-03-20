@@ -21,16 +21,16 @@ let jsonExample = [
     }
 ]    
 
-async function onClickSearch(){
+function onClickSearch(){
     let query = document.getElementById('txtSearch').value;
-    let url = URL_API + "search?query="+query;
-    let result = await fetch(url);
-    let json = await result.json();
-
+    search(query);
 }
 
-function load(){
-    let jsonResult = jsonExample;
+async function search(query){
+
+    let url = URL_API + "search?query="+query;
+    let result = await fetch(url);
+    let jsonResult = await result.json();
 
     let html = '';
     for(let json of jsonResult){
@@ -53,4 +53,11 @@ function load(){
  
 }
 
+function load(){
+    let query = window.location.href.split('?query=')[1];
+    document.getElementById('txtSearch').value = query;
+    search(query);
+}
+
 load();
+

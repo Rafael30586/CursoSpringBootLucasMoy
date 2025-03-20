@@ -2,6 +2,7 @@ package com.f_rafael.webscrapper.controllers;
 
 import com.f_rafael.webscrapper.WebpageRepository;
 import com.f_rafael.webscrapper.models.Webpage;
+import com.f_rafael.webscrapper.services.SpiderService;
 import com.f_rafael.webscrapper.services.WebscrapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,8 @@ public class WebpageController {
     private WebpageRepository repository;
     @Autowired
     private WebscrapperService webscrapperService;
+    @Autowired
+    private SpiderService spiderService;
 
     @GetMapping("/api/search")
     public List<Webpage> search(@RequestParam("query") String query){
@@ -35,4 +38,11 @@ public class WebpageController {
         webscrapperService.scrapAndSave(url);
 
     }
+
+    @GetMapping("/api/start")
+    public void scrapAndSave() throws IOException {
+        spiderService.start();
+    }
+
+
 }

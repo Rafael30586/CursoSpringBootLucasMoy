@@ -1,48 +1,52 @@
 package com.f_rafael.customers.controllers;
 
-import com.f_rafael.customers.entities.Customer;
 import com.f_rafael.customers.entities.User;
-import com.f_rafael.customers.services.CustomerService;
+
+import com.f_rafael.customers.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
     private UserService service;
 
 
-    @GetMapping("/customer/{id}")
+    @GetMapping("/user/{id}")
     public User getUser(@PathVariable Integer id){
-        return service.getCustomer(id);
+        return service.getUser(id);
     }
 
-    @GetMapping("/customer")
+    @GetMapping("/user")
     public List<User> getAllUsers(){
-        return service.getAllCustomers();
+        return service.getAllUsers();
     }
 
-    @DeleteMapping("/customer/{id}")
+    @DeleteMapping("/user/{id}")
     public void removeUser(@PathVariable Integer id){
-        service.removeCustomer(id);
+        service.removeUser(id);
     }
 
-    @PostMapping("/customer")
-    public void addUser(@RequestBody User user){
-        service.addCustomer(user);
+    @PostMapping("/user")
+    public void register(@RequestBody User user){
+        service.addUser(user);
     }
 
 
-    @PutMapping("/customer/{id}")
-    public void updateUser(@RequestBody User updateCustomer, @PathVariable Integer id){
-        service.updateCustomer(updateCustomer,id);
+    @PutMapping("/user/{id}")
+    public void updateUser(@RequestBody User updateUser, @PathVariable Integer id){
+        service.updateUser(updateUser,id);
     }
 
-    @GetMapping("/customer/search")
+    @GetMapping("/user/search")
     public List<User> searchUser(@RequestParam(name = "email", required = false) String email,
                                          @RequestParam(name = "address", required = false) String address) {
-        return service.searchCustomer(email,address);
+        return service.searchUser(email,address);
     }
 }

@@ -1,39 +1,42 @@
-package com.f_rafael.Users.services;
+package com.f_rafael.customers.services;
 
 import com.f_rafael.customers.entities.User;
-import com.f_rafael.customers.entities.User;
+
 import com.f_rafael.customers.repository.UserRepository;
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Service;
 
+
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserServiceImpl {
+@Service
+public class UserServiceImpl implements UserService{
 
+    public static final String SECRET_KEY = "4r4urfrfh";
     @Autowired
     UserRepository repository;
 
-
-
     public User getUser (Integer id){
-        Optional<User> User = repository.findById(id);
-        if(User.isPresent()){
-            return User.get();
+        Optional<User> user = repository.findById(id);
+        if(user.isPresent()){
+            return user.get();
         }
         return null;
     }
 
 
     public List<User> getAllUsers(){
-        List<User> Users = new ArrayList();
+        List<User> users = new ArrayList();
 
         Iterable<User> iterable = repository.findAll();
         for(User User:iterable){
-            Users.add(User);
+            users.add(User);
         }
-        return Users;
+        return users;
     }
 
 
@@ -42,11 +45,14 @@ public class UserServiceImpl {
     }
 
 
-    public void addUser( User User){
-        repository.save(User);
+    public void addUser(User user){
+
+        String hashPassword = Hashing.sha256()
+                .hashString(user.getPassword() + SECRET_KEY, StandardCharsets.UTF_8)
+                .toString();
+        user.setPassword(hashPassword);
+        repository.save(user);
     }
-
-
 
     public void updateUser(User updateUser,Integer id){
         updateUser.setId(id);

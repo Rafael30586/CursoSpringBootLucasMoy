@@ -36,7 +36,7 @@ public class JwtUtil { //Informacion en: https://www.baeldung.com/java-auth0-jwt
 
         DecodedJWT decoded = verifier.verify(token);
 
-        String userId = decoded.getClaim("userId").asString();
+        String userId = decoded.getClaim("userId").toString();
 
         return userId;
     }

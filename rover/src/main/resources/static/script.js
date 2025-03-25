@@ -9,6 +9,8 @@ function createMap(){
 function moveRover(x,y){
     document.getElementById("rover").style.left = (x * 100) + 'px';
     document.getElementById("rover").style.top = (y * 100) + 'px';
+
+    playMoveSound();
 }
 
 function createRock(x,y){
@@ -22,22 +24,35 @@ function createRock(x,y){
     rock.style.top = (y*100) + 'px';
 }
 
-function clickBtnRotateLeft(){
-    alert("LEFT");
+var posX = 0;
+var posY = 0;
 
+function clickBtnRotateLeft(){
+    posX--;
+    moveRover(posX, posY);
 }
 
 function clickBtnRotateRight(){
-    alert("RIGHT");
-
+    posX++;
+    moveRover(posX, posY);
 }
 
 function clickBtnMoveForward(){
-    alert("FORWARD");
-
+    posY++;
+    moveRover(posX, posY);
 }
 
 function clickBtnMoveBack(){
-    alert("BACK");
+    posY--;
+    moveRover(posX, posY);
+}
 
+function playMoveSound(){
+    var audioElement = document.getElementById("audio");
+    audioElement.src = "sounds/move.wav";
+
+    audioElement.controls = true;
+    audioElement.autoplay = true;
+
+    document.getElementById("container").appendChild(audioElement);
 }

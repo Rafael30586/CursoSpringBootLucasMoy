@@ -41,3 +41,7 @@
 #mapImage{
     width: 1900px;
 }
+
+audio {
+    display:none
+}

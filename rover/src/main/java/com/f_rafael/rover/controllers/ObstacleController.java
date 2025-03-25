@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class ObstacleController {
 
-    @PostMapping("/rover")
+    @PostMapping("/obstacle")
     public void create(@RequestBody ObstacleDto obstacle){
         System.out.println(obstacle);
 

@@ -1,0 +1,43 @@
+#control-panel{
+    position:absolute;
+    z-index: 10;
+    background-color: white;
+    padding: 10x;
+    border-radius: 20px;
+    opacity: 0.8;
+    bottom: 10px;
+    left: calc(50% - 160px)
+}
+
+#control-panel .btn-control{
+    width: 80px;
+    cursor: pointer;
+}
+
+#btn-left{
+    transform: rotate(-90deg);
+}
+
+#btn-forward{
+    transform: rotate(-90deg);
+}
+
+#btn-back{
+    transform: rotate(90deg);
+}
+
+#rover{
+    position: absolute;
+    width: 100px;
+    transition: all 500ms linear;
+}
+
+.rock{
+    position: absolute;
+    width: 100px;
+    margin-top: 22px;
+}
+
+#mapImage{
+    width: 1900px;
+}

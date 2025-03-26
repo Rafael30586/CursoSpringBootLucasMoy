@@ -16,5 +16,6 @@ public class Rover {
     @Column(name = "posy")
     private Integer y;
     @Column(name = "direction")
+    @Enumerated(EnumType.STRING)
     private Direction direction;
 }

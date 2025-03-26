@@ -1,9 +1,33 @@
-function createMap(){
-    moveRover(2,3);
-    createRock(4,5);
-    createRock(1,1);
-    createRock(4,7);
-    createRock(8,8);
+createMap();
+
+async function createMap(){
+    //Obtener la informacion del rover
+    let roverResponse = await fetch('/api/rover',{ 
+        method: 'GET',
+        headers: {
+            'content-type':'application/json'
+        }
+    })
+
+    let roverJson = await roverResponse.json();
+    moveRover(roverJson.x,roverJson.y);
+
+    //Obtener la informacion de los obstaculos
+
+    let obstacleResponse = await fetch('/api/obstacle',{
+        method: 'GET',
+        headers: {
+            'content-type':'application/json'
+        }
+    })
+
+    let obstaclesJson = await obstacleResponse.json();
+    
+
+    obstaclesJson.forEach(element => {
+        createRock(element.x,element.y)
+    });
+    
 }
 
 function moveRover(x,y){

@@ -2,16 +2,9 @@ createMap();
 
 async function createMap(){
     //Obtener la informacion del rover
-    let roverResponse = await fetch('/api/rover',{ 
-        method: 'GET',
-        headers: {
-            'content-type':'application/json'
-        }
-    })
 
-    let roverJson = await roverResponse.json();
-    moveRover(roverJson.x,roverJson.y);
-
+    refreshRover();
+    
     //Obtener la informacion de los obstaculos
 
     let obstacleResponse = await fetch('/api/obstacle',{
@@ -28,6 +21,37 @@ async function createMap(){
         createRock(element.x,element.y)
     });
     
+}
+
+async function refreshRover(){
+
+    let roverResponse = await fetch('/api/rover',{ 
+        method: 'GET',
+        headers: {
+            'content-type':'application/json'
+        }
+    })
+
+    let roverJson = await roverResponse.json();
+    moveRover(roverJson.x,roverJson.y);
+
+
+}
+
+async function sendCommand(command){
+    let requestBody = {
+        "commands": [command]
+    }
+
+    await fetch('/api/rover/command',{
+        method: 'POST',
+        headers: {
+            'content-type':'application/json'
+        },
+        body: JSON.stringify(requestBody)
+    });
+
+    await refreshRover();
 }
 
 function moveRover(x,y){
@@ -52,23 +76,20 @@ var posX = 0;
 var posY = 0;
 
 function clickBtnRotateLeft(){
-    posX--;
-    moveRover(posX, posY);
+    sendCommand("L");
 }
 
 function clickBtnRotateRight(){
-    posX++;
-    moveRover(posX, posY);
+    sendCommand("R");
 }
 
-function clickBtnMoveForward(){
-    posY++;
-    moveRover(posX, posY);
+async function clickBtnMoveForward(){
+
+    sendCommand("F");
 }
 
 function clickBtnMoveBack(){
-    posY--;
-    moveRover(posX, posY);
+    sendCommand("B");
 }
 
 function playMoveSound(){

@@ -30,5 +30,9 @@ public class RoverController {
     public void sendCommand(@RequestBody CommandDto commands){
         System.out.println(commands);
 
+        for(String command: commands.getCommands()){
+            System.out.println(command);
+        }
+
     }
 }

@@ -18,4 +18,20 @@ public class Rover {
     @Column(name = "direction")
     @Enumerated(EnumType.STRING)
     private Direction direction;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setX(Integer x) {
+        this.x = x;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    public void setY(Integer y) {
+        this.y = y;
+    }
 }

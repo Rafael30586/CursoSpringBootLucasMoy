@@ -4,6 +4,7 @@ import com.f_rafael.rover.dto.CommandDto;
 import com.f_rafael.rover.dto.RoverDto;
 import com.f_rafael.rover.models.Rover;
 import com.f_rafael.rover.services.RoverService;
+import com.f_rafael.rover.services.RoverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,14 @@ public class RoverController {
 
     @PostMapping("/rover/command")
     public void sendCommand(@RequestBody CommandDto commands){
+
+
         System.out.println(commands);
 
+        service.get();
+
         for(String command: commands.getCommands()){
+            service.sendCommand(command);
             System.out.println(command);
         }
 

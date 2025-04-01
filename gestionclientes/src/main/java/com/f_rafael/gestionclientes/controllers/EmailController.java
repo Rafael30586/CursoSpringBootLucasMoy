@@ -2,6 +2,7 @@ package com.f_rafael.gestionclientes.controllers;
 
 import com.f_rafael.gestionclientes.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 public class EmailController {
 
+    @Qualifier("jetMailService")
     @Autowired
     private EmailService service;
 

@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Properties;
 
-@Service
+@Service("emailService")
 public class EmailServiceImpl implements EmailService{
 
     @Autowired
